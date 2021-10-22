@@ -13,7 +13,6 @@ public class GroupCreationTests {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Webdrivers\\chromedriver.exe");
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
