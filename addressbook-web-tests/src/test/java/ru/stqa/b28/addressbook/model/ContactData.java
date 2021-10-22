@@ -1,4 +1,4 @@
-package ru.stqa.b28.addressbook;
+package ru.stqa.b28.addressbook.model;
 
 public class ContactData {
 
