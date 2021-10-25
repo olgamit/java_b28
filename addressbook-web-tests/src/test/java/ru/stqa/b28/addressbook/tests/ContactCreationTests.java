@@ -8,8 +8,8 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testNewContactCreation() throws Exception {
-        app.addNewContact();
-        app.fillContactInfo(new ContactData("Ivan",
+        app.getContactHelper().addNewContact();
+        app.getContactHelper().fillContactInfo(new ContactData("Ivan",
                                             "Ivanov",
                                             "tester",
                                             "QA engineer",
@@ -19,7 +19,7 @@ public class ContactCreationTests extends TestBase {
                                             "1",
                                             "January",
                                             "2001"));
-        app.viewContactDetails();
+        app.getContactHelper().viewContactDetails();
     }
 
 }
