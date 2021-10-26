@@ -1,42 +1,43 @@
 package ru.stqa.b28.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.b28.addressbook.model.ContactData;
 
-public class ContactHelper {
-
-    private WebDriver wd;
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void viewContactDetails() {
-        wd.findElement(By.linkText("home page")).click();
-        wd.findElement(By.xpath("//img[@alt='Details']")).click();
+        click(By.linkText("home page"));
+        click(By.xpath("//img[@alt='Details']"));
     }
 
     public void fillContactInfo(ContactData contactData) {
-        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-        wd.findElement(By.name("nickname")).sendKeys(contactData.getNickname());
-        wd.findElement(By.name("title")).sendKeys(contactData.getTittle());
-        wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
-        wd.findElement(By.name("email")).sendKeys(contactData.getMail());
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("nickname"), contactData.getNickname());
+        type(By.name("title"), contactData.getTittle());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("email"), contactData.getMail());
         setBirthday(contactData.getbDay(), contactData.getbMonth(), contactData.getbYear());
-        wd.findElement(By.name("mobile")).sendKeys(contactData.getPhone());
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+        type(By.name("mobile"), contactData.getPhone());
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
     public void setBirthday(String bDay, String bMonth, String bYear) {
-        new Select(wd.findElement(By.name("bday"))).selectByVisibleText(bDay);
-        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(bMonth);
-        wd.findElement(By.name("byear")).sendKeys(bYear);
+        selectDropDown(bDay, By.name("bday"));
+        selectDropDown(bMonth, By.name("bmonth"));
+        type(By.name("byear"), bYear);
+    }
+
+    private void selectDropDown(String option, By locator) {
+        new Select(wd.findElement(locator)).selectByVisibleText(option);
     }
 
     public void addNewContact() {
-        wd.findElement(By.linkText("add new")).click();
+        click(By.linkText("add new"));
     }
 }
