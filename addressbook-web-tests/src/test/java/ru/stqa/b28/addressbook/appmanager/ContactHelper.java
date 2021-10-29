@@ -34,7 +34,12 @@ public class ContactHelper extends HelperBase {
     }
 
     private void selectDropDown(String option, By locator) {
-        new Select(wd.findElement(locator)).selectByVisibleText(option);
+        if (option !=null){
+                String selectedValue = new Select(wd.findElement(locator)).getFirstSelectedOption().getText();
+                if (!option.equals(selectedValue)){
+                    new Select(wd.findElement(locator)).selectByVisibleText(option);
+                }
+        }
     }
 
     public void addNewContact() {
