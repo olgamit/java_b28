@@ -34,11 +34,13 @@ public class ContactHelper extends HelperBase {
     }
 
     private void selectDropDown(String option, By locator) {
-        if (option !=null){
-                String selectedValue = new Select(wd.findElement(locator)).getFirstSelectedOption().getText();
-                if (!option.equals(selectedValue)){
+        if (option != null) {
+            String selectedValue = new Select(wd.findElement(locator)).getFirstSelectedOption().getText();
+            if (! option.equals(selectedValue)) {
+                if (isElementPresent(locator)) {
                     new Select(wd.findElement(locator)).selectByVisibleText(option);
                 }
+            }
         }
     }
 
@@ -47,11 +49,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-       click(By.cssSelector("input[type='checkbox']"));
+        click(By.cssSelector("input[type='checkbox']"));
     }
 
     public void deleteSelectedContact() {
-        click (By.xpath("//input[@value='Delete']"));
+        click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
     }
 
