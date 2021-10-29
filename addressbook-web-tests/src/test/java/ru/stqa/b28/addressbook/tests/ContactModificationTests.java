@@ -7,6 +7,10 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() {
+        if (! app.getContactHelper().isContactExist()) {
+            app.getContactHelper()
+               .createContact(new ContactData("Ivan", "Ivanov", "tester", null, null, null, null, null, null, null));
+        }
         app.getContactHelper().initContactModification();
         app.getContactHelper()
            .fillContactInfo(new ContactData("Petr",

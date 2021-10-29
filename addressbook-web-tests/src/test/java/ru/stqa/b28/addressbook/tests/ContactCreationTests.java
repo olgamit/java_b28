@@ -8,17 +8,17 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testNewContactCreation() throws Exception {
-        app.getContactHelper().addNewContact();
-        app.getContactHelper().fillContactInfo(new ContactData("Ivan",
-                                            "Ivanov",
-                                            "tester",
-                                            "QA engineer",
-                                            "IT company",
-                                            "testuser@test.com",
-                                            "8 923 333 1122",
-                                            "1",
-                                            "January",
-                                            "2001"));
+        app.getContactHelper()
+           .createContact(new ContactData("Ivan",
+                                          "Ivanov",
+                                          "tester",
+                                          "QA engineer",
+                                          "IT company",
+                                          "testuser@test.com",
+                                          "8 923 333 1122",
+                                          "1",
+                                          "January",
+                                          "2001"));
         app.getContactHelper().viewContactDetails();
     }
 

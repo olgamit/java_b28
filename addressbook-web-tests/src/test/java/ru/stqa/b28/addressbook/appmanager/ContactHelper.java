@@ -49,7 +49,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        click(By.cssSelector("input[type='checkbox']"));
+        click(By.name("selected[]"));
     }
 
     public void deleteSelectedContact() {
@@ -63,5 +63,20 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.xpath("//div[@id='content']/form/input[22]"));
+    }
+
+    public void createContact(ContactData contactData) {
+        addNewContact();
+        fillContactInfo(contactData);
+        returnToHomePage();
+
+    }
+
+    private void returnToHomePage() {
+        click(By.linkText("home"));
+    }
+
+    public boolean isContactExist() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
