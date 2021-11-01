@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class ContactData {
 
+    private int id;
     private final String firstname;
     private final String lastname;
     private final String nickname;
@@ -15,6 +16,30 @@ public class ContactData {
     private final String bMonth;
     private final String bYear;
 
+    public ContactData(int id,
+                       String firstname,
+                       String lastname,
+                       String nickname,
+                       String tittle,
+                       String company,
+                       String mail,
+                       String phone,
+                       String bDay,
+                       String bMonth,
+                       String bYear) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.nickname = nickname;
+        this.tittle = tittle;
+        this.company = company;
+        this.mail = mail;
+        this.phone = phone;
+        this.bDay = bDay;
+        this.bMonth = bMonth;
+        this.bYear = bYear;
+    }
+
     public ContactData(String firstname,
                        String lastname,
                        String nickname,
@@ -25,6 +50,7 @@ public class ContactData {
                        String bDay,
                        String bMonth,
                        String bYear) {
+        this.id = Integer.MAX_VALUE;
         this.firstname = firstname;
         this.lastname = lastname;
         this.nickname = nickname;
@@ -97,5 +123,9 @@ public class ContactData {
     @Override
     public int hashCode() {
         return Objects.hash(firstname, lastname);
+    }
+
+    public int getId() {
+        return id;
     }
 }
