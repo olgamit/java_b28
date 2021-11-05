@@ -56,12 +56,12 @@ public class GroupData {
             return false;
         }
         final GroupData groupData = (GroupData) o;
-        return Objects.equals(name, groupData.name);
+        return id == groupData.id && Objects.equals(name, groupData.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
 
     public int getId() {

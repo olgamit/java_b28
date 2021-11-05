@@ -16,6 +16,10 @@ public class ContactData {
     private String bMonth;
     private String bYear;
 
+    public int getId() {
+        return id;
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -125,15 +129,11 @@ public class ContactData {
             return false;
         }
         final ContactData that = (ContactData) o;
-        return Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname);
-    }
-
-    public int getId() {
-        return id;
+        return Objects.hash(id, firstname, lastname);
     }
 }

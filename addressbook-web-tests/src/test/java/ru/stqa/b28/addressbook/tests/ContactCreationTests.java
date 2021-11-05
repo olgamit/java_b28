@@ -11,7 +11,7 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testNewContactCreation() throws Exception {
-        List<ContactData> before = app.contact().getContactList();
+        Set<ContactData> before = app.contact().all();
         ContactData contact = new ContactData().withFirstname("Ivan")
                                                .withLastname("Ivanov")
                                                .withNickname("tester")
@@ -24,13 +24,11 @@ public class ContactCreationTests extends TestBase {
                                                .withBYear("2001");
 
         app.contact().create(contact);
-        List<ContactData> after = app.contact().getContactList();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
+        contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
         before.add(contact);
-        final Comparator<? super ContactData> byID = Comparator.comparingInt(ContactData::getId);
-        before.sort(byID);
-        after.sort(byID);
         Assert.assertEquals(before, after);
     }
 }
