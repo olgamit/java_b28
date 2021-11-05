@@ -72,7 +72,13 @@ public class ContactHelper extends HelperBase {
         addNewContact();
         fillContactInfo(contactData);
         returnToHomePage();
+    }
 
+    public void modifyContact(int index, ContactData contact) {
+        initContactModification(index);
+        fillContactInfo(contact);
+        submitContactModification();
+        returnToHomePage();
     }
 
     public void returnToHomePage() {
@@ -89,7 +95,6 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        //List<WebElement> elements = wd.findElements(By.cssSelector(" td:nth-child(2)"));
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));

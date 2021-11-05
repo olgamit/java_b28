@@ -1,6 +1,7 @@
 package ru.stqa.b28.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.b28.addressbook.model.ContactData;
 
@@ -9,15 +10,19 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-    @Test
-    public void testContactModification() {
+    @BeforeMethod
+    public void ensurePreconditions() {
         if (! app.getContactHelper().isContactExist()) {
             app.getContactHelper()
                .createContact(new ContactData("Ivan", "Ivanov", "tester", null, null, null, null, null, null, null));
         }
+    }
+
+    @Test
+    public void testContactModification() {
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactModification(before.size() - 1);
-        ContactData contact = new ContactData(before.get(before.size() - 1).getId(),
+        int index = before.size() - 1;
+        ContactData contact = new ContactData(before.get(index).getId(),
                                               "Petr",
                                               "Petrov",
                                               "dev",
@@ -28,13 +33,10 @@ public class ContactModificationTests extends TestBase {
                                               "3",
                                               "March",
                                               "2001");
-        app.getContactHelper().fillContactInfo(contact);
-        app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().gotoHomePage();
+        app.getContactHelper().modifyContact(index, contact);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
-
-        before.remove(before.size() - 1);
+        before.remove(index);
         before.add(contact);
 
         final Comparator<? super ContactData> byID = Comparator.comparingInt(ContactData::getId);
@@ -42,5 +44,7 @@ public class ContactModificationTests extends TestBase {
         after.sort(byID);
         Assert.assertEquals(before, after);
     }
+
+
 }
 
