@@ -13,7 +13,7 @@ public class ContactModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (! app.contact().isContactExist()) {
-            app.contact().create(new ContactData("Ivan", "Ivanov", "tester", null, null, null, null, null, null, null));
+            app.contact().create(new ContactData().withFirstname("Ivan").withLastname("Ivanov").withNickname("tester"));
         }
     }
 
@@ -21,17 +21,18 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         List<ContactData> before = app.contact().getContactList();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(),
-                                              "Petr",
-                                              "Petrov",
-                                              "dev",
-                                              "developer",
-                                              "IT company",
-                                              "devuser@test.com",
-                                              "8 923 444 5566",
-                                              "3",
-                                              "March",
-                                              "2001");
+        ContactData contact = new ContactData().withId(before.get(index).getId())
+                                               .withFirstname("Petr")
+                                               .withLastname("Petrov")
+                                               .withNickname("dev")
+                                               .withTittle("developer")
+                                               .withCompany("IT company")
+                                               .withMail("devuser@test.com")
+                                               .withPhone("8 923 444 5566")
+                                               .withBDay("3")
+                                               .withBMonth("March")
+                                               .withBYear("2001");
+
         app.contact().modify(index, contact);
         List<ContactData> after = app.contact().getContactList();
         Assert.assertEquals(after.size(), before.size());

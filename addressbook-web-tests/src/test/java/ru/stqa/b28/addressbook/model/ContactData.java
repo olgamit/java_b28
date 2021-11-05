@@ -4,64 +4,17 @@ import java.util.Objects;
 
 public class ContactData {
 
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String nickname;
-    private final String tittle;
-    private final String company;
-    private final String mail;
-    private final String phone;
-    private final String bDay;
-    private final String bMonth;
-    private final String bYear;
-
-    public ContactData(int id,
-                       String firstname,
-                       String lastname,
-                       String nickname,
-                       String tittle,
-                       String company,
-                       String mail,
-                       String phone,
-                       String bDay,
-                       String bMonth,
-                       String bYear) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.tittle = tittle;
-        this.company = company;
-        this.mail = mail;
-        this.phone = phone;
-        this.bDay = bDay;
-        this.bMonth = bMonth;
-        this.bYear = bYear;
-    }
-
-    public ContactData(String firstname,
-                       String lastname,
-                       String nickname,
-                       String tittle,
-                       String company,
-                       String mail,
-                       String phone,
-                       String bDay,
-                       String bMonth,
-                       String bYear) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.tittle = tittle;
-        this.company = company;
-        this.mail = mail;
-        this.phone = phone;
-        this.bDay = bDay;
-        this.bMonth = bMonth;
-        this.bYear = bYear;
-    }
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String nickname;
+    private String tittle;
+    private String company;
+    private String mail;
+    private String phone;
+    private String bDay;
+    private String bMonth;
+    private String bYear;
 
     public String getFirstname() {
         return firstname;
@@ -101,6 +54,61 @@ public class ContactData {
 
     public String getbYear() {
         return bYear;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withTittle(String tittle) {
+        this.tittle = tittle;
+        return this;
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withMail(String mail) {
+        this.mail = mail;
+        return this;
+    }
+
+    public ContactData withPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public ContactData withBDay(String bDay) {
+        this.bDay = bDay;
+        return this;
+    }
+
+    public ContactData withBMonth(String bMonth) {
+        this.bMonth = bMonth;
+        return this;
+    }
+
+    public ContactData withBYear(String bYear) {
+        this.bYear = bYear;
+        return this;
     }
 
     @Override
