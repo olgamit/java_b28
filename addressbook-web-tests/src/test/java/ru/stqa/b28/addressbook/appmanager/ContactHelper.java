@@ -24,9 +24,14 @@ public class ContactHelper extends HelperBase {
         type(By.name("nickname"), contactData.getNickname());
         type(By.name("title"), contactData.getTittle());
         type(By.name("company"), contactData.getCompany());
+        type(By.name("address"), contactData.getAddress());
         type(By.name("email"), contactData.getMail());
+        type(By.name("email2"), contactData.getMail2());
+        type(By.name("email3"), contactData.getMail3());
         setBirthday(contactData.getbDay(), contactData.getbMonth(), contactData.getbYear());
-        type(By.name("mobile"), contactData.getPhone());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
@@ -66,7 +71,7 @@ public class ContactHelper extends HelperBase {
 
     public void initContactModification(int id) {
         WebElement entry = wd.findElement(By.xpath("//input[@id= '" + id + "']/../.."));
-        entry.findElement(By.xpath("//img[@title='Edit']")).click();
+        entry.findElement(By.xpath(".//img[@title='Edit']")).click();
     }
 
     public void submitContactModification() {
@@ -109,12 +114,45 @@ public class ContactHelper extends HelperBase {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
+            List<WebElement> cells = element.findElements(By.tagName("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            String lastName = element.findElement(By.cssSelector(" td:nth-child(2)")).getText();
-            String firstName = element.findElement(By.cssSelector(" td:nth-child(3)")).getText();
-            ContactData contact = new ContactData().withId(id).withFirstname(firstName).withLastname(lastName);
+            String lastName = cells.get(1).getText();
+            String firstName = cells.get(2).getText();
+            String address = cells.get(3).getText();
+            String allMails = cells.get(4).getText();
+            String allPhones = cells.get(5).getText();
+            ContactData contact = new ContactData().withId(id)
+                                                   .withFirstname(firstName)
+                                                   .withLastname(lastName)
+                                                   .withAddress(address)
+                                                   .withAllMails(allMails)
+                                                   .withAllPhones(allPhones);
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModification(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        String mail = wd.findElement(By.name("email")).getAttribute("value");
+        String mail2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String mail3 = wd.findElement(By.name("email3")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId())
+                                .withFirstname(firstname)
+                                .withLastname(lastname)
+                                .withHomePhone(home)
+                                .withMobilePhone(mobile)
+                                .withWorkPhone(work)
+                                .withAddress(address)
+                                .withMail(mail)
+                                .withMail2(mail2)
+                                .withMail3(mail3);
     }
 }

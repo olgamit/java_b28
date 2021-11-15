@@ -19,7 +19,7 @@ public class ContactCreationTests extends TestBase {
                                                .withTittle("QA engineer")
                                                .withCompany("IT company")
                                                .withMail("testuser@test.com")
-                                               .withPhone("8 923 333 1122")
+                                               .withMobilePhone("8 923 333 1122")
                                                .withBDay("1")
                                                .withBMonth("January")
                                                .withBYear("2001");

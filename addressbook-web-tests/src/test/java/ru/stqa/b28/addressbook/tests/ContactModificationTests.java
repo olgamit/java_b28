@@ -30,7 +30,7 @@ public class ContactModificationTests extends TestBase {
                                                .withTittle("developer")
                                                .withCompany("IT company")
                                                .withMail("devuser@test.com")
-                                               .withPhone("8 923 444 5566")
+                                               .withMobilePhone("8 923 444 5566")
                                                .withBDay("3")
                                                .withBMonth("March")
                                                .withBYear("2001");
