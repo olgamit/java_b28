@@ -1,8 +1,16 @@
 package ru.stqa.b28.addressbook.tests;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.b28.addressbook.model.ContactData;
 import ru.stqa.b28.addressbook.model.Contacts;
+
+import java.io.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,20 +18,23 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
-    public void testNewContactCreation() throws Exception {
-        Contacts before = app.contact().all();
-        ContactData contact = new ContactData().withFirstname("Ivan")
-                                               .withLastname("Ivanov")
-                                               .withNickname("tester")
-                                               .withTittle("QA engineer")
-                                               .withCompany("IT company")
-                                               .withMail("testuser@test.com")
-                                               .withMobilePhone("8 923 333 1122")
-                                               .withBDay("1")
-                                               .withBMonth("January")
-                                               .withBYear("2001");
+    @DataProvider
+    public Iterator<Object[]> validContactsFromJson() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+        String json = "";
+        String line = reader.readLine();
+        while (line != null) {
+            json += line;
+            line = reader.readLine();
+        }
+        Gson gson = new Gson();
+        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType());
+        return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+    }
 
+    @Test(dataProvider = "validContactsFromJson")
+    public void testNewContactCreation(ContactData contact) {
+        Contacts before = app.contact().all();
         app.contact().create(contact);
         Contacts after = app.contact().all();
         assertThat(after.size(), equalTo(before.size() + 1));
