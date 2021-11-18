@@ -1,0 +1,37 @@
+[
+  {
+    "firstname": "Ivan 0",
+    "lastname": "Ivanov 0",
+    "address": "123456, Tomsk, Pushkina str, 121-0",
+    "mobilePhone": "8 923 123 1110",
+    "mail": "testuser-0@mail.com"
+  },
+  {
+    "firstname": "Ivan 1",
+    "lastname": "Ivanov 1",
+    "address": "123456, Tomsk, Pushkina str, 121-1",
+    "mobilePhone": "8 923 123 1111",
+    "mail": "testuser-1@mail.com"
+  },
+  {
+    "firstname": "Ivan 2",
+    "lastname": "Ivanov 2",
+    "address": "123456, Tomsk, Pushkina str, 121-2",
+    "mobilePhone": "8 923 123 1112",
+    "mail": "testuser-2@mail.com"
+  },
+  {
+    "firstname": "Ivan 3",
+    "lastname": "Ivanov 3",
+    "address": "123456, Tomsk, Pushkina str, 121-3",
+    "mobilePhone": "8 923 123 1113",
+    "mail": "testuser-3@mail.com"
+  },
+  {
+    "firstname": "Ivan 4",
+    "lastname": "Ivanov 4",
+    "address": "123456, Tomsk, Pushkina str, 121-4",
+    "mobilePhone": "8 923 123 1114",
+    "mail": "testuser-4@mail.com"
+  }
+]

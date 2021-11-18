@@ -1,26 +1,45 @@
 package ru.stqa.b28.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Objects;
 
 public class ContactData {
 
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String nickname;
+    @Expose
     private String company;
+    @Expose
     private String tittle;
+    @Expose
     private String address;
+    @Expose
     private String homePhone;
+    @Expose
     private String mobilePhone;
+    @Expose
     private String workPhone;
+    @Expose
     private String allPhones;
+    @Expose
     private String mail;
+    @Expose
     private String mail2;
+    @Expose
     private String mail3;
+    @Expose
     private String allMails;
+    @Expose
     private String bDay;
+    @Expose
     private String bMonth;
+    @Expose
     private String bYear;
 
 
