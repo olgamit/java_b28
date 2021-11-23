@@ -248,7 +248,9 @@ public class ContactData {
 
     @Override
     public String toString() {
-        return "ContactData{" + "firstname='" + firstname + '\'' + ", lastname='" + lastname + '\'' + '}';
+        return "ContactData{" + "id=" + id + ", firstname='" + firstname + '\'' + ", lastname='" + lastname + '\'' +
+               ", company='" + company + '\'' + ", tittle='" + tittle + '\'' + ", address='" + address + '\'' +
+               ", mobilePhone='" + mobilePhone + '\'' + ", mail='" + mail + '\'' + '}';
     }
 
     @Override
@@ -260,11 +262,14 @@ public class ContactData {
             return false;
         }
         final ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) &&
+               Objects.equals(company, that.company) && Objects.equals(tittle, that.tittle) &&
+               Objects.equals(address, that.address) && Objects.equals(mobilePhone, that.mobilePhone) &&
+               Objects.equals(mail, that.mail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
+        return Objects.hash(id, firstname, lastname, company, tittle, address, mobilePhone, mail);
     }
 }
