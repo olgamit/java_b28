@@ -7,7 +7,7 @@ import ru.stqa.b28.addressbook.appmanager.ApplicationManager;
 public class TestBase {
 
     protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser",
-                                                                                              BrowserType.CHROME));
+                                                                                              BrowserType.FIREFOX));
 
     @BeforeSuite
     public void setUp() throws Exception {
