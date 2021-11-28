@@ -79,18 +79,17 @@ public class ContactData {
 
     @Expose
     @Transient
-    //@Column(name = "bday")
-    //@Type(type = "byte")
+    @Column(name = "bday",  columnDefinition = "TINYINT")
     private String bDay;
 
     @Expose
     @Transient
-    //@Column(name = "bmonth")
+    @Column(name = "bmonth")
     private String bMonth;
 
     @Expose
     @Transient
-    //@Column(name = "byear")
+    @Column(name = "byear")
     private String bYear;
 
 
@@ -139,9 +138,6 @@ public class ContactData {
     }
 
     public String getbDay() {
-        //if (!bDay.equals(null)) {
-        //    return Byte.toString(bDay);
-        //} else return "";
         return bDay;
     }
 
@@ -226,7 +222,6 @@ public class ContactData {
     }
 
     public ContactData withBDay(String bDay) {
-        //this.bDay = Byte.parseByte(bDay);
         this.bDay = bDay;
         return this;
     }
