@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "addressbook")
@@ -79,7 +79,7 @@ public class ContactData {
 
     @Expose
     @Transient
-    @Column(name = "bday",  columnDefinition = "TINYINT")
+    @Column(name = "bday", columnDefinition = "TINYINT")
     private String bDay;
 
     @Expose
@@ -91,6 +91,16 @@ public class ContactData {
     @Transient
     @Column(name = "byear")
     private String bYear;
+
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    @ManyToMany
+    @JoinTable(name = "address_in_groups",
+               joinColumns = @JoinColumn(name = "id"),
+               inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
 
 
     public int getId() {
@@ -266,5 +276,10 @@ public class ContactData {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstname, lastname, company, tittle, address, mobilePhone, mail);
+    }
+
+    public ContactData inGroup (GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

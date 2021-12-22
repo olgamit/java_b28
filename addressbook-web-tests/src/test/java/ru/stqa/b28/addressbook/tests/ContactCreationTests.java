@@ -4,8 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.b28.addressbook.model.ContactData;
-import ru.stqa.b28.addressbook.model.Contacts;
+import ru.stqa.b28.addressbook.model.*;
 
 import java.io.*;
 import java.util.Iterator;
@@ -35,7 +34,8 @@ public class ContactCreationTests extends TestBase {
     @Test(dataProvider = "validContactsFromJson")
     public void testNewContactCreation(ContactData contact) {
         Contacts before = app.db().contacts();
-        app.contact().create(contact);
+        Groups beforeGroups = app.db().groups();
+        app.contact().create(contact, true);
         assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
         Contacts after = app.db().contacts();
         assertThat(after,

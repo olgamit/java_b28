@@ -2,6 +2,7 @@ package ru.stqa.b28.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.b28.addressbook.model.ContactData;
 import ru.stqa.b28.addressbook.model.Contacts;
 
@@ -18,7 +19,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//img[@alt='Details']"));
     }
 
-    public void fillContactInfo(ContactData contactData) {
+    public void fillContactInfo(ContactData contactData, boolean isWithGroup) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("nickname"), contactData.getNickname());
@@ -33,6 +34,16 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getMobilePhone());
         type(By.name("work"), contactData.getWorkPhone());
         click(By.xpath("//div[@id='content']/form/input[21]"));
+
+        if (isWithGroup) {
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() ==1);
+                new Select (wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
+            else {
+                Assert.assertFalse(isElementPresent(By.name("new_group")));
+            }
+        }
     }
 
     public void setBirthday(String bDay, String bMonth, String bYear) {
@@ -78,15 +89,15 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[22]"));
     }
 
-    public void create(ContactData contactData) {
+    public void create(ContactData contactData, Boolean isWithGroup) {
         addNewContact();
-        fillContactInfo(contactData);
+        fillContactInfo(contactData, isWithGroup);
         returnToHomePage();
     }
 
     public void modify(ContactData contact) {
         initContactModification(contact.getId());
-        fillContactInfo(contact);
+        fillContactInfo(contact, false);
         submitContactModification();
         returnToHomePage();
     }

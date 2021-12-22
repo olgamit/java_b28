@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "group_list")
@@ -27,6 +27,13 @@ public class GroupData {
     @Column(name = "group_footer")
     @Type(type = "text")
     private String footer;
+
+    public Contacts getContacts() {
+        return new Contacts(contacts);
+    }
+
+    @ManyToMany (mappedBy = "groups")
+    private Set<ContactData> contacts = new HashSet<>();
 
     public String getName() {
         return name;
