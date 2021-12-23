@@ -2,6 +2,8 @@
   {
     "firstname": "Ivan 0",
     "lastname": "Ivanov 0",
+    "company": "IT company",
+    "tittle": "testEmployee",
     "address": "123456, Tomsk, Pushkina str, 121-0",
     "mobilePhone": "8 923 123 1110",
     "mail": "testuser-0@mail.com"
@@ -9,8 +11,19 @@
   {
     "firstname": "Ivan 1",
     "lastname": "Ivanov 1",
+    "company": "IT company",
+    "tittle": "testEmployee",
     "address": "123456, Tomsk, Pushkina str, 121-1",
     "mobilePhone": "8 923 123 1111",
     "mail": "testuser-1@mail.com"
+  },
+  {
+    "firstname": "Ivan 2",
+    "lastname": "Ivanov 2",
+    "company": "IT company",
+    "tittle": "testEmployee",
+    "address": "123456, Tomsk, Pushkina str, 121-2",
+    "mobilePhone": "8 923 123 1112",
+    "mail": "testuser-2@mail.com"
   }
 ]

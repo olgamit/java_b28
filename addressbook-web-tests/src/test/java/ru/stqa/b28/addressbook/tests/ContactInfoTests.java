@@ -24,7 +24,7 @@ public class ContactInfoTests extends TestBase {
                                         .withMail("testuser@test.com")
                                         .withMail2("test-user123@gmail.com")
                                         .withMobilePhone("8 923 333 1122")
-                                        .withHomePhone("+7 (495) 123 45 67"));
+                                        .withHomePhone("+7 (495) 123 45 67"), false);
         }
     }
 
