@@ -3,8 +3,7 @@ package ru.stqa.b28.addressbook.appmanager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.b28.addressbook.model.ContactData;
-import ru.stqa.b28.addressbook.model.Contacts;
+import ru.stqa.b28.addressbook.model.*;
 
 import java.util.*;
 
@@ -113,6 +112,10 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home"));
     }
 
+    public void resetDefaultHomeView() {
+        click(By.id("logo"));
+    }
+
     public boolean isContactExist() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -165,5 +168,28 @@ public class ContactHelper extends HelperBase {
                                 .withMail(mail)
                                 .withMail2(mail2)
                                 .withMail3(mail3);
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        resetDefaultHomeView();
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
+        click(By.name("add"));
+        returnToHomePage();
+    }
+
+    public void addToGroup(ContactData contact, int id) {
+        resetDefaultHomeView();
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(id));
+        click(By.name("add"));
+        returnToHomePage();
+    }
+
+    public void removeFromGroup(ContactData contact, GroupData group) {
+        resetDefaultHomeView();
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+        selectContactById(contact.getId());
+        click(By.name("remove"));
     }
 }
