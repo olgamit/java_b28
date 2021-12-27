@@ -188,7 +188,7 @@ public class ContactHelper extends HelperBase {
 
     public void removeFromGroup(ContactData contact, GroupData group) {
         resetDefaultHomeView();
-        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+        new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(group.getId()));
         selectContactById(contact.getId());
         click(By.name("remove"));
     }
