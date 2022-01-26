@@ -10,7 +10,7 @@ import java.io.File;
 public class TestBase {
 
     protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser",
-                                                                                              BrowserType.FIREFOX));
+                                                                                              BrowserType.CHROME));
 
     @BeforeSuite
     public void setUp() throws Exception {
@@ -18,7 +18,7 @@ public class TestBase {
         app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.bak");
     }
 
-    @AfterSuite
+    @AfterSuite  (alwaysRun = true)
     public void tearDown() throws Exception {
         app.ftp().restore("config_inc.php.bak", "config_inc.php");
         app.stop();
