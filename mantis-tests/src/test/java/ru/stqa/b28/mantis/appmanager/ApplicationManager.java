@@ -9,16 +9,16 @@ import org.openqa.selenium.remote.BrowserType;
 import java.io.*;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.MatchResult;
 
 public class ApplicationManager {
 
     private WebDriver wd;
     private String browser;
     private final Properties properties;
-    private RegistrationHelper registrationHelper;
+    private SessionHelper sessionHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private UserHelper user;
 
 
     public ApplicationManager(String browser) {
@@ -46,11 +46,11 @@ public class ApplicationManager {
         }
     }
 
-    public RegistrationHelper registration() {
-        if (registrationHelper == null) {
-            registrationHelper = new RegistrationHelper(this);
+    public SessionHelper session() {
+        if (sessionHelper == null) {
+            sessionHelper = new SessionHelper(this);
         }
-        return registrationHelper;
+        return sessionHelper;
     }
 
     public FtpHelper ftp() {
@@ -58,6 +58,13 @@ public class ApplicationManager {
             ftp = new FtpHelper(this);
         }
         return ftp;
+    }
+
+    public UserHelper user() {
+        if (user == null) {
+            user = new UserHelper(this);
+        }
+        return user;
     }
 
     public MailHelper mail() {
