@@ -1,8 +1,7 @@
 package ru.stqa.b28.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
-import ru.stqa.b28.mantis.model.Issue;
-import ru.stqa.b28.mantis.model.Project;
+import ru.stqa.b28.mantis.model.*;
 
 import javax.xml.rpc.ServiceException;
 import java.math.BigInteger;
@@ -58,5 +57,35 @@ public class SoapHelper {
                           .withDescription(createdIssueData.getDescription())
                           .withProject(new Project().withId(createdIssueData.getProject().getId().intValue())
                                                     .withName(createdIssueData.getProject().getName()));
+    }
+
+    public Set<Issue> getIssuesForProject() throws MalformedURLException, ServiceException, RemoteException {
+        MantisConnectPortType mc = getMantisConnect();
+        Set<Project> projects = getProjects();
+        Project someProject = projects.iterator().next();
+        IssueData[] issues = mc.mc_project_get_issues(username,
+                                                      password,
+                                                      BigInteger.valueOf(someProject.getId()),
+                                                      BigInteger.valueOf(0),
+                                                      BigInteger.valueOf(- 1));
+        return Arrays.asList(issues)
+                     .stream()
+                     .map((i) -> new Issue().withId(i.getId().intValue())
+                                            .withSummary(i.getSummary())
+                                            .withDescription(i.getDescription())
+                                            .withStatus(new Status().withId(i.getStatus().getId().intValue())
+                                                                    .withName(i.getStatus().getName())))
+                     .collect(Collectors.toSet());
+    }
+
+    public Issue getIssueById(int id) throws MalformedURLException, ServiceException, RemoteException {
+        MantisConnectPortType mc = getMantisConnect();
+        IssueData foundIssue = mc.mc_issue_get(username, password, BigInteger.valueOf(id));
+
+        return new Issue().withId(foundIssue.getId().intValue())
+                          .withSummary(foundIssue.getSummary())
+                          .withDescription(foundIssue.getDescription())
+                          .withStatus(new Status().withId(foundIssue.getStatus().getId().intValue())
+                                                  .withName(foundIssue.getStatus().getName()));
     }
 }
