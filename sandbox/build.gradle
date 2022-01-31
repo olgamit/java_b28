@@ -1,12 +1,13 @@
 apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "MyFirstProgram"
+testResultsDirName = "$buildDir/test-reports"
 
 repositories {
     mavenCentral()
 }
 dependencies{
-    implementation 'com.slickqa:testng:7.0.0-7'
+    implementation 'org.testng:testng:7.4.0'
 }
 
 test {
