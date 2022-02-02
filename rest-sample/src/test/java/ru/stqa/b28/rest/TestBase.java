@@ -24,7 +24,8 @@ public class TestBase {
         JsonElement foundIssues = parsed.getAsJsonObject().get("issues");
         Set<Issue> issues = new Gson().fromJson(foundIssues, new TypeToken<Set<Issue>>() {}.getType());
         Issue issue = issues.iterator().next();
-        if (! issue.getState_name().equals("closed")) {
+        String state = issue.getState_name();
+        if (! state.equals("Closed")) {
             return true;
         } else {
             return false;
